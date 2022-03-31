@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/cc3ede2aa0.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Admin</title>
+</head>
+
+<body>
+    <div class="web">
+        <header class="header">
+            <nav class="header__nav">
+                <div class="logo1">
+                    <a class="navbar-brand" href="#"><img src="logo2.png" alt=""></a>
+                </div>
+
+                <div class="logo2"><a class="dropdown-item" href="logout">Logout <i class="fas fa-power-off"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <div id="layoutSidenav" class="content">
+            <div id="layoutSidenav_nav" class="content-left">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="nav__header">
+                                <button class="btn__button btn-link btn-sm order-1 order-lg-0 ml-2" id="sidebarToggle"
+                                    href="#"><i class="fas fa-bars"></i></button>
+                                <h3>Danh mục</h3>
+                            </div>
+                            <div class="nav__menu">
+                                <!-- <ul>
+                                    <li>
+                                        <a class="nav-link" href="doanhthu">
+                                            Doanh Thu
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link " href="admin">
+                                            Quản lí sản phẩm
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="quanlytaikhoan">
+                                            Quản lí người dùng
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="nav-link" href="quanlydonhang">
+                                            Quản lí đơn hàng
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="quanlykho">
+                                            Quản lí kho
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as: Admin</div>
+                    </div>
+                </nav>
+            </div>
+
+            <div id="layoutSidenav_content" class="content-right">
+
+                <div class="product">
+                    <div class="title-btn">
+                        <div class="title">Quản lí tài khoản đăng nhập</div>
+                    </div>
+
+                    <table class="table ">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th>Email</th>
+                                <th>Họ và tên</th>
+                                <th>Điện thoại</th>
+
+                                <th>Ngày sinh</th>
+                                <th>Mật khẩu</th>
+                                <th>Ảnh</th>
+                                <th>Trạng thái</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" id="donhang">
+                            <%for (var i=0;i<result.length;i++) { %>
+                                <tr>
+
+                                    <th>
+                                        <%=result[i].ten_khachhang%>
+                                    </th>
+                                    <th>
+                                        <%=result[i].sdt%>
+                                    </th>
+                                    <th>
+                                        <%=result[i].type_khachhang%>
+                                    </th>
+
+                                    <th>
+                                        <%=result[i].email_khachhang%>
+                                    </th>
+
+                                    <th>
+                                        <%=result[i].dia_chi%>
+                                    </th>
+
+                                    <th>
+                                        <%=result[i].dia_chi%>
+                                    </th>
+
+                                    <th>
+                                        <%=result[i].trang_thai%>
+                                    </th>
+
+                                    <td>
+                                        <div class="btn__action">
+                                            <button class="btn btn--primary btn__confirm">Xác nhận</button>
+                                            <button
+                                                class="btn auth-form__controls-back btn--normal btn__cancel">Hủy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
