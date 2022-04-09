@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var CreditSchema=mongoose.Schema({
    soThe:String,
-   ngayHetHat:Date,
+   ngayHetHan:String,
    maCVV:String
 })
 var CreditModel=mongoose.model('CreditCard',CreditSchema)

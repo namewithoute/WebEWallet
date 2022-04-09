@@ -38,5 +38,7 @@ function validEmail() {
                 ${data.message}
                 </div>`
             }
+            else{
+            }
         })
 }

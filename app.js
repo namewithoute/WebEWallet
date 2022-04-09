@@ -8,6 +8,10 @@ var CreditCard = require('./models/creditCard')
 var registerRoute=require('./routes/registerRoute')
 var loginRoute=require('./routes/loginRoute')
 var changepassRoute = require('./routes/changepassRoute')
+var informationRoute=require('./routes/informationRoute')
+var forgetpassRoute=require('./routes/forgetpassRoute')
+var checkOTP=require('./routes/checkOTPRoute')
+var depositRoute=require('./routes/depositRoute')
 var mongoose = require('mongoose')
 var user_account = require('./models/userAccount')
 var session = require('express-session');
@@ -45,32 +49,32 @@ app.use(function (req, res, next) {
     next()
 })
 
-var authUserLogin=function (req,res,next){
-    if(req.session.userId){
-        next()
-    }
-    else{
-        req.session.flash = {
-            type: 'error',
-            message: 'Bạn cần phải đăng nhập trước khi sử dụng dịch vụ này'
-        }
-        res.redirect('/login')
-    }
-}
+// var authUserLogin=function (req,res,next){
+//     if(req.session.userId){
+//         next()
+//     }
+//     else{
+//         req.session.flash = {
+//             type: 'error',
+//             message: 'Bạn cần phải đăng nhập trước khi sử dụng dịch vụ này'
+//         }
+//         res.redirect('/login')
+//     }
+// }
 
-var authUserAccount= async function(req,res,next){
-    var statusAcc = await user_account.findOne({username:req.session.userId})
-    if(statusAcc.trang_thai=='Chờ xác minh'){
-        req.session.flash = {
-            type: 'error',
-            message: 'Tính năng này chỉ dành cho các tài khoản đã được xác minh'
-        }
-        res.json('Sai')
-    }
-    if(statusAcc.trang_thai=='Đã xác minh'){
-        next()
-    }
-}
+// var authUserAccount= async function(req,res,next){
+//     var statusAcc = await user_account.findOne({username:req.session.userId})
+//     if(statusAcc.trang_thai=='Chờ xác minh'){
+//         req.session.flash = {
+//             type: 'error',
+//             message: 'Tính năng này chỉ dành cho các tài khoản đã được xác minh'
+//         }
+//         res.json('Sai')
+//     }
+//     if(statusAcc.trang_thai=='Đã xác minh'){
+//         next()
+//     }
+// }
 
 // app.get('/register', function (req, res) {
 //     res.render('RegisterForm')
@@ -315,11 +319,17 @@ app.use('/changepassword',changepassRoute)
 //     res.redirect('/information')
 // })
 
-app.get('/information',authUserLogin,authUserAccount,async function(req,res){
-    var infor = await user_account.findOne({username:req.session.userId})
-    res.json(infor)
-    // res.render('information')
-})
+
+
+app.use('/information',informationRoute)
+
+// app.get('/information',authUserLogin,authUserAccount,async function(req,res){
+//     var infor = await user_account.findOne({username:req.session.userId})
+//     res.json(infor)
+//     // res.render('information')
+// })
+
+
 
 app.get('/admin',async function(req,res){
     var data= await user_account.find()
@@ -327,53 +337,66 @@ app.get('/admin',async function(req,res){
     res.render('admin',{result:data})
 })
 
-app.get('/forgetpassword',function(req,res){
-    res.render('ForgetPassword')
-})
 
-app.post('/validemail',async function(req,res){
-    var checkemail=await user_account.findOne({email:req.body.email})
-    if(checkemail){
-        res.json({code:0,message:'Email đúng'})
-    }
-    else{
-        res.json({code:1,message:'Email này chưa được sử dụng bởi bất cứ tài khoản nào'})
-    }
-})
+// app.get('/otpcode',function(req,res){
+//     if(!req.session.userEmail){
+//         res.redirect('/forgetpassword')
+//     }
+// })
 
-async function sendmail(gmail_user, username_id, user_pass) {
+app.use('/forgetpassword',forgetpassRoute)
 
-    const admingmail = process.env.EMAIL_ADMIN
-    const adminpass = process.env.PASS_EMAIL
+app.use('/otpcode',checkOTP)
+// app.post('/validemail',async function(req,res){
+//     var checkemail=await user_account.findOne({email:req.body.email})
+//     if(checkemail){
+//         req.session.userEmail=req.body.email
+//         res.json({code:0,message:'Email đúng'})
+//     }
+//     else{
+//         res.json({code:1,message:'Email này chưa được sử dụng bởi bất cứ tài khoản nào'})
+//     }
+// })
 
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: admingmail,
-            pass: adminpass
-        }
-    });
+// app.post('/submitotp',function(req,res){
+//     if (req.body.otp ==req.session.otp){
+//         res.redirect('/changepassword')}
+// })
+
+// async function sendmail(gmail_user, username_id, user_pass) {
+
+//     const admingmail = process.env.EMAIL_ADMIN
+//     const adminpass = process.env.PASS_EMAIL
+
+//     var transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//             user: admingmail,
+//             pass: adminpass
+//         }
+//     });
 
 
-    var mailOptions = {
-        from: 'trnnam481@gmail.com',
-        to: gmail_user,
-        subject: 'Thông tin đăng nhập ví điện tử',
-        text: `
-                Username: ${username_id}
-                Password: ${user_pass}
-                Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi`
-    };
+//     var mailOptions = {
+//         from: 'trnnam481@gmail.com',
+//         to: gmail_user,
+//         subject: 'Thông tin đăng nhập ví điện tử',
+//         text: `
+//                 Username: ${username_id}
+//                 Password: ${user_pass}
+//                 Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi`
+//     };
 
-    try {
-        await transporter.sendMail(mailOptions)
-        console.log("send success")
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
+//     try {
+//         await transporter.sendMail(mailOptions)
+//         console.log("send success")
+//     }
+//     catch (err) {
+//         console.log(err)
+//     }
+// }
 
+app.use('/deposit',depositRoute)
 
 app.listen(3000, function () {
     console.log("Listening at port 3000")
