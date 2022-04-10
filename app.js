@@ -12,6 +12,7 @@ var informationRoute=require('./routes/informationRoute')
 var forgetpassRoute=require('./routes/forgetpassRoute')
 var checkOTP=require('./routes/checkOTPRoute')
 var depositRoute=require('./routes/depositRoute')
+var withdrawRoute=require('./routes/withdrawRoute')
 var mongoose = require('mongoose')
 var user_account = require('./models/userAccount')
 var session = require('express-session');
@@ -333,7 +334,6 @@ app.use('/information',informationRoute)
 
 app.get('/admin',async function(req,res){
     var data= await user_account.find()
-    console.log(data)
     res.render('admin',{result:data})
 })
 
@@ -397,6 +397,8 @@ app.use('/otpcode',checkOTP)
 // }
 
 app.use('/deposit',depositRoute)
+
+app.use('/withdraw',withdrawRoute)
 
 app.listen(3000, function () {
     console.log("Listening at port 3000")
