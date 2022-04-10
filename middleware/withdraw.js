@@ -1,6 +1,7 @@
 var transactionHistory = require('../models/transactionHistory')
 var withdrawHistory = require('../models/withdrawHistory')
 var moneyInAcc = require('../models/moneyInAccount')
+var creditCard=require('../models/creditCard')
 var moment = require('moment')
 var shortid = require('shortid')
 function withdrawGET(req, res) {
@@ -18,6 +19,13 @@ async function withdrawPOST(req, res) {
         res.json({message:"Error"})
         return
     }
+    //kiểm tra thẻ có hợp lệ không
+    var findCreditCard= await creditCard.findOne({soThe:creditNumber,maCVV:CVV,ngayHetHan:validDate})
+    if(!findCreditCard){
+        res.json("Thẻ này không được hỗ trợ để rút tiền")
+        return
+    }
+    //kiểm tra số tiền rút có là bội của 50000
     if(amount%50000!=0){
         res.json({message:"Số tiền nhập phải là bội của 50.000đ"})
         return
