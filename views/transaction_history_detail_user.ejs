@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0"></script>
+    <title>Chi tiết giao dịch</title>
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="logo1">
+                <a class="navbar-brand" href="/"><img src="/img/logo2.png" alt=""></a>
+            </div>
+
+            <div class="logo2"><a class="dropdown-item" href="logout">Đăng xuất <i class="fas fa-power-off"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-banner">
+        <div class="container">
+            <div class="row-banner">
+                <div class="col-9">
+                    <div class="nav__header-transaction">
+                        <div>
+                            <h1>LỊCH SỬ GIAO DỊCH</h1>
+                        </div>
+                      
+                    </div>
+                    <div class="mt-5">
+                        <div class="form-row">
+                            <div class="col-6 form-group">
+                                <label class="" for="">MÃ GIAO DỊCH</label><br>
+                                <label class="information_text" id="username"><%= data.idDetail%></label>
+                            </div>
+                           
+                            <div class="col-6 form-group">
+                                <label class="" for="">LOẠI GIAO DỊCH</label><br>
+                                <label class="information_text" id="loaigiaodich"><%= data.type%></label>
+                            </div>
+                            <div class="col-6 form-group">
+                                
+                                <label class="" for="">TÀI KHOẢN PHÁT SINH GIAO DỊCH</label><br>
+                                <label class="information_text" id="username"><%= data.username%></label>
+                            </div>
+                            <% if(data.type=='Chuyển tiền'){%>
+                            <div class="col-6 form-group">
+                                <label class="" for="">TÀI KHOẢN NHẬN</label><br>
+                                <label class="information_text" id="username"><%= data.receiver%></label>
+                            </div>
+                            <%}%>
+                            <div class="col-6 form-group">
+                                <label for="">SỐ TIỀN</label><br>
+                                <label class="information_text" ><%= data.amount%></label>
+                            </div>
+                            <%if(data.type!="Nạp tiền"){%>
+                            <div class="col-6 form-group">
+                                <label for="">PHÍ GIAO DỊCH</label><br>
+                                <label class="information_text" ><%= data.fees%></label>
+                            </div>
+                        <%}%>
+                            <% if(data.type=='Chuyển tiền'){%>
+
+                            <div class="col-6 form-group">
+                                <label for="">NGƯỜI TRẢ PHÍ</label><br>
+                                <label class="information_text" ><%= data.feeBearer%></label>
+                            </div>
+                            <%}%>
+
+                            <div class="col-6 form-group">
+                                <label for="">GHI CHÚ</label><br>
+                                <label class="information_text" ><%= data.note%></label>
+                            </div>
+                            <div class="col-6 form-group">
+                                <label for="">Trạng thái</label><br>
+                                <label class="information_text" id="email" value=""><%= data.state%></label>
+
+                            </div>
+                         
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Trung Tâm Trợ Giúp</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Đăng ký tài khoản</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Hướng dẫn sử dụng ví</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Về shop</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Giới Thiệu</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Tuyển dụng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Điều Khoản</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Danh mục</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">Khuyến mãi</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link"></a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Theo dõi chúng tôi</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">
+                                <i class="footer-item__icon fab fa-facebook"></i>
+                                Facebook
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">
+                                <i class="footer-item__icon fab fa-instagram"></i>
+                                Instagram
+                            </a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="" class="footer-item__link">
+                                <i class="footer-item__icon fab fa-linkedin"></i>
+                                Linkedin
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
+                    <div class="footer__download">
+                        <img src="/img/QR_Code.png" alt="Download QR" class="footer__download-QR">
+                        <div class="footer__download-apps">
+                            <a href="" class="footer__download-app-link">
+                                <img src="/img/CH_play.png" alt="Google play" class="footer__download-app-img">
+                            </a>
+                            <a href="" class="footer__download-app-link">
+                                <img src="/img/App_Store.png" alt="App store" class="footer__download-app-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="grid">
+                <p class="footer__text">2022 - Bản quyền thuộc về công ty Momy</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="/js/main.js"></script>
+</html>

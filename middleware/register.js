@@ -1,5 +1,6 @@
 var multiparty = require('multiparty')
 var user_account=require('../models/userAccount')
+var moneyInAcc=require('../models/moneyInAccount')
 var shortid = require('shortid')
 var fs=require('fs')
 
@@ -75,11 +76,15 @@ async function postRegister(req, res) {
             sl_nhap_sai: 0,
             tinhtrang_doimk: 0,
             ngay_tao: date,
+            ngay_capnhat:date,
             cmnd_truoc: filecmnd_truoc,
             cmnd_sau: filecmnd_sau
 
         }).save();
-
+        new moneyInAcc({
+            username:username_id,
+            amount:0
+        }).save()
         sendmail(fields.email[0], username_id, user_pass)
 
         // console.log('field data: ', fields)

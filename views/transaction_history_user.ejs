@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="/style/style.css">
+    <script src="https://kit.fontawesome.com/cc3ede2aa0.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Lịch Sử Giao Dịch</title>
+</head>
+
+<body>
+    <div class="web">
+        <header class="header">
+            <nav class="header__nav">
+                <div class="logo3">
+                    <a class="navbar-brand" href="/"><img src="/img/logo2.png" alt=""></a>
+                </div>
+
+                <div class="logo2"><a class="dropdown-item" href="logout">Đăng xuất <i class="fas fa-power-off"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <div id="layoutSidenav" class="content">
+
+            <div id="layoutSidenav_content" class="content-right">
+
+                <div class="product">
+                    <div class="title-btn">
+                        <div class="title">Lịch Sử Giao Dịch</div>
+                    </div>
+
+                    <table class="tbl">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Mã giao dịch</th>
+                                <th>Loại giao dịch</th>
+                                <th>Thời gian thực hiện</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" id="donhang">
+                            <%for (var i=0;i<result.length;i++) { %>
+                                <tr>
+                                  
+                                    <th>
+                                        <%=result[i].idDetail%>
+                                    </th>
+                                    <th>
+                                        <%=result[i].type%>
+                                    </th>
+                                  
+
+                                    <th>
+                                        <%=result[i].createAt%>
+                                    </th>
+
+                                    <th>
+                                        <%=result[i].state%>
+                                    </th>
+
+                                    <th>
+                                        <div class="btn__action">
+                                            <span>
+                                                <a class="btn btn-outline-danger" href="/historytransaction/<%=result[i].idDetail%>">
+                                                    Xem chi tiết
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-2-4">
+                        <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Trung Tâm Trợ Giúp</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Đăng ký tài khoản</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Hướng dẫn sử dụng ví</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-2-4">
+                        <h3 class="footer__heading">Về shop</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Giới Thiệu</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Tuyển dụng</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Điều Khoản</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-2-4">
+                        <h3 class="footer__heading">Danh mục</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">Khuyến mãi</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link"></a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-2-4">
+                        <h3 class="footer__heading">Theo dõi chúng tôi</h3>
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">
+                                    <i class="footer-item__icon fab fa-facebook"></i>
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">
+                                    <i class="footer-item__icon fab fa-instagram"></i>
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-item__link">
+                                    <i class="footer-item__icon fab fa-linkedin"></i>
+                                    Linkedin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid__column-2-4">
+                        <h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
+                        <div class="footer__download">
+                            <img src="public/img/QR_Code.png" alt="Download QR" class="footer__download-QR">
+                            <div class="footer__download-apps">
+                                <a href="" class="footer__download-app-link">
+                                    <img src="public/img/CH_play.png" alt="Google play"
+                                        class="footer__download-app-img">
+                                </a>
+                                <a href="" class="footer__download-app-link">
+                                    <img src="public/img/App_Store.png" alt="App store"
+                                        class="footer__download-app-img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="grid">
+                    <p class="footer__text">2022 - Bản quyền thuộc về công ty Momy</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

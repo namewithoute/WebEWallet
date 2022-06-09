@@ -4,6 +4,7 @@ var withdrawHistorySchema=mongoose.Schema({
     idDetail:String,
     creditCard:String,
     amount:Number,
+    fees:Number,
     note:String,
     state:String,
     createAt:Date,

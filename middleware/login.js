@@ -1,5 +1,5 @@
 var user_account=require('../models/userAccount')
-
+var admin_acc = require('../models/adminAccount')
 
 
 function loginGet(req,res){
@@ -10,6 +10,13 @@ function loginGet(req,res){
 }
 
 async function loginPost(req,res){
+    var admin = await admin_acc.findOne({username:req.body.username,password:req.body.password})
+    if(admin){
+        req.session.role="admin"
+        res.redirect('/admin/account')
+        return
+    }
+
     var nhapsai = await user_account.findOne({ username: req.body.username })
     if(nhapsai==null){
         req.session.flash = {
@@ -76,9 +83,14 @@ async function loginPost(req,res){
                 return
             }
             else if(nhapsai.sl_nhap_sai==5){
-                await user_account.updateOne({ username: req.body.username }, {sl_nhap_sai:nhapsai.sl_nhap_sai+1, trang_thai_dangnhap: nhapsai.trang_thai_dangnhap + 1 })
-                // res.redirect('/login')
-                // return
+                await user_account.updateOne({ username: req.body.username }, {sl_nhap_sai:nhapsai.sl_nhap_sai+1, trang_thai_dangnhap: nhapsai.trang_thai_dangnhap + 1 ,trang_thai:'Bị khóa vô thời hạn'})
+                req.session.flash = {
+                    type: 'error',
+                    intro: 'wrong pass or username',
+                    message: 'Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ'
+                }
+                res.redirect('/login')
+                return
             }
             else {
                 await user_account.updateOne({ username: req.body.username }, { sl_nhap_sai: nhapsai.sl_nhap_sai + 1 })

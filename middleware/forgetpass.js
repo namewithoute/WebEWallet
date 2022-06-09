@@ -6,7 +6,9 @@ function forgetpassGET(req,res){
 }
 
 async function forgetpassPOST(req,res){
+  
     var checkemail=await user_account.findOne({email:req.body.email})
+    
     if(checkemail){
         var otp = Math.floor(Math.random() * 10000)
         req.session.otp=otp

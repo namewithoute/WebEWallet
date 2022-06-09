@@ -13,6 +13,7 @@ var user_accountSchema=mongoose.Schema({
     sl_nhap_sai:Number,
     tinhtrang_doimk:Number,
     ngay_tao:Date,
+    ngay_capnhat:Date,
     cmnd_truoc:String,
     cmnd_sau:String
 

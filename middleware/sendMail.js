@@ -1,4 +1,5 @@
-var nodemailer=require('nodemailer')
+var nodemailer=require('nodemailer');
+const nodemon = require('nodemon');
 
 async function sendmail(gmail_user, username_id, user_pass) {
 
@@ -6,16 +7,21 @@ async function sendmail(gmail_user, username_id, user_pass) {
     const adminpass = process.env.PASS_EMAIL
 
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        // service: 'gmail',
+        host:"mail.phongdaotao.com",
+        port:25,
+        secure:false,
         auth: {
             user: admingmail,
             pass: adminpass
-        }
+        },
+        tls: {rejectUnauthorized: false}
+
     });
 
 
     var mailOptions = {
-        from: 'trnnam481@gmail.com',
+        from: admingmail,
         to: gmail_user,
         subject: 'Thông tin đăng nhập ví điện tử',
         text: `
@@ -31,6 +37,8 @@ async function sendmail(gmail_user, username_id, user_pass) {
     catch (err) {
         console.log(err)
     }
+    console.log(username_id, user_pass)
+
 }
 
 module.exports=sendmail
